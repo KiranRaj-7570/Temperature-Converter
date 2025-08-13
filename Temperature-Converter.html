@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature converter</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, #00c6ff, #0072ff);
+        color: #fff;
+        text-align: center;
+        height: 100vh;
+        margin-top: 10%;
+        overflow: hidden;
+    }
+
+    form {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px 50px;
+        border-radius: 15px;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        text-wrap: nowrap;
+    }
+
+    input[type="number"] {
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        width: 200px;
+        margin-bottom: 15px;
+        outline: none;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input[type="radio"] {
+        margin: 10px;
+    }
+
+    button {
+        background: #ff9800;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        background: #e68a00;
+        transform: scale(1.05);
+    }
+
+    #result {
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <form>
+        <h1>Temperature Converter</h1>
+        <input type="number" id="textbox"><br>
+        <input type="radio" name="unit" id="celsiusToFahrenheit">
+        <label for="celsiusToFahrenheit">Celsius ➡️ Fahrenheit</label><br>
+        <input type="radio" name="unit" id="farenheitocelsius">
+        <label for="farenheitocelsius">Fahrenheit ➡️ Celsius</label><br>
+        <button type="button" onclick="convert()">Submit</button>
+        <p id="result"></p>
+    </form>
+    <script>
+        const input = document.getElementById('textbox').value;
+        const result = document.getElementById('result');
+        const celsiusToFahrenheit = document.getElementById('celsiusToFahrenheit');
+        const fahrenheitToCelsius = document.getElementById('farenheitocelsius');
+        function convert() {
+            const input = document.getElementById('textbox').value;
+            if (celsiusToFahrenheit.checked) {
+                const celsius = parseFloat(input);
+                if (isNaN(celsius)) {
+                    result.textContent = "Please enter a valid number.";
+                } else {
+                    const fahrenheit = (celsius * 9/5) + 32;
+                    result.textContent = `${celsius}°C is equal to ${fahrenheit.toFixed(2)}°F`;
+                }
+            } else if (fahrenheitToCelsius.checked) {
+                const fahrenheit = parseFloat(input);
+                if (isNaN(fahrenheit)) {
+                    result.textContent = "Please enter a valid number.";
+                } else {
+                    const celsius = (fahrenheit - 32) * 5/9;
+                    result.textContent = `${fahrenheit}°F is equal to ${celsius.toFixed(2)}°C`;
+                }
+            } else {
+                result.textContent = "Please select a conversion option.";
+            }
+        }
+    </script>
+</body>
+
+</html>
